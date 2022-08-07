@@ -7,3 +7,8 @@ headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWe
 r1 = requests.get('http://httpbin.org/headers',headers = headers)
 user_details = r1.text
 print(user_details)
+
+from user_agent import generate_user_agent, generate_navigator
+from pprint import pprint
+print(generate_user_agent())
+#pprint(generate_navigator())
