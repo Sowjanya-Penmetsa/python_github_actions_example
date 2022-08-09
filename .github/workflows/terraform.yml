@@ -1,8 +1,8 @@
 name: Terraform Plan
 
 on:
-  push:
-    branches: [ master ]
+  workflow_dispatch:
+    
 env:
   ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
   ARM_CLIENT_SECRET: ${{secrets.AZURE_CLIENT_SECRET}}
