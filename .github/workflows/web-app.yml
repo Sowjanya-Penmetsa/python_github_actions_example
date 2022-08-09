@@ -1,7 +1,10 @@
-name: Terraform Plan
+name: Terraform Plan for creating web app 
 
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["Terraform Plan for storage account"]
+    types:
+      - completed
     
 env:
   ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
@@ -11,7 +14,7 @@ env:
   ROOT_PATH: '${{github.workspace}}/terraform/App-service' 
 
 jobs:
-  terraform-plan:
+  terraform-plan-for-app-service:
     name: terraform plan
     runs-on: ubuntu-latest  
 
@@ -33,10 +36,10 @@ jobs:
         run: terraform plan
         working-directory: ${{ env.ROOT_PATH }}
   
-  terraform-apply:
+  terraform-apply-for-app-service:
     
     name: 'terraform apply'
-    needs: [terraform-plan]
+    needs: [terraform-plan-for-app-service]
     runs-on: ubuntu-latest
     
     steps:
