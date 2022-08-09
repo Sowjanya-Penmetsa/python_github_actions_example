@@ -30,7 +30,7 @@ resource "azurerm_storage_account" "tfstate_strg_acc" {
 }
 
 resource "azurerm_storage_container" "tfstate_container" {
-  name                  = "tf_state_container"
+  name                  = "tf-state-container"
   storage_account_name  = azurerm_storage_account.tfstate_strg_acc.name
   container_access_type = "blob"
 }
