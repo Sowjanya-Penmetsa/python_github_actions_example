@@ -13,7 +13,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "tfstate_rg" {
   name     = "tf_state_rg"
-  location = "nortcentralus"
+  location = "northcentralus"
 }
 
 resource "azurerm_storage_account" "tfstate_strg_acc" {
