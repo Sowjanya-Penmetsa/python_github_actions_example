@@ -30,7 +30,7 @@ resource "azurerm_app_service_plan" "web_app_service_plan" {
 }  
   
 resource "azurerm_app_service" "web_app_service" {  
-  name                = "webappservice"  
+  name                = "webappservice202212"  
   location            =  azurerm_resource_group.web_app_rg.location  
   resource_group_name = azurerm_resource_group.web_app_rg.name 
   app_service_plan_id = azurerm_app_service_plan.web_app_service_plan.id  
