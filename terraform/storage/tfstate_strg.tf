@@ -12,12 +12,12 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "tfstate_rg" {
-  name     = var.RG_Name
-  location = var.Strg_Acc_Location
+  name     = "tf_state_rg"
+  location = "nortcentralus"
 }
 
 resource "azurerm_storage_account" "tfstate_strg_acc" {
-  name                     = var.Strg_Acc_Name
+  name                     = "tf_state_str_acc"
   resource_group_name      = azurerm_resource_group.tfstate_rg.name
   location                 = azurerm_resource_group.tfstate_rg.location
   account_tier             = "Standard"
@@ -30,7 +30,7 @@ resource "azurerm_storage_account" "tfstate_strg_acc" {
 }
 
 resource "azurerm_storage_container" "tfstate_container" {
-  name                  = var.Strg_Acc_Container_Name
+  name                  = "tf_state_container"
   storage_account_name  = azurerm_storage_account.tfstate_strg_acc.name
   container_access_type = "blob"
 }
