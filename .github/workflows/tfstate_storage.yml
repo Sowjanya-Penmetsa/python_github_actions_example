@@ -1,8 +1,7 @@
-name: Terraform Plan
+name: Terraform Plan for storage account
 
 on:
-  push:
-    branches: [ master ]
+  workflow_dispatch: 
     
 env:
   ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
@@ -12,8 +11,8 @@ env:
   ROOT_PATH: '${{github.workspace}}/terraform/storage' 
 
 jobs:
-  terraform-plan:
-    name: terraform plan
+  terraform-plan-for-storage-account:
+    name: terraform plan 
     runs-on: ubuntu-latest  
 
     steps:
@@ -34,10 +33,10 @@ jobs:
         run: terraform plan
         working-directory: ${{ env.ROOT_PATH }}
   
-  terraform-apply:
+  terraform-apply-for-storage_account:
     
     name: 'terraform apply'
-    needs: [terraform-plan]
+    needs: [terraform-plan-for-storage-account]
     runs-on: ubuntu-latest
     
     steps:
