@@ -6,8 +6,8 @@ provider "azurerm" {
 terraform {
   backend "azurerm" {
     resource_group_name  = "tf_state_rg"
-    storage_account_name = "tf_state_str_acc"
-    container_name       =  "tf_state_container"
+    storage_account_name = "tfstatestracc"
+    container_name       =  "tf-state-container"
     key                  = "terraform.tfstate"
   }
 }
