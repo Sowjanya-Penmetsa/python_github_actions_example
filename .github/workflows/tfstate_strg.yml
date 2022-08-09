@@ -1,0 +1,54 @@
+name: Terraform Plan
+
+on:
+  workflow_dispatch:
+    
+env:
+  ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
+  ARM_CLIENT_SECRET: ${{secrets.AZURE_CLIENT_SECRET}}
+  ARM_SUBSCRIPTION_ID: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+  ARM_TENANT_ID: ${{secrets.AZURE_TENANT_ID}}
+  ROOT_PATH: '${{github.workspace}}/terraform/storage' 
+
+jobs:
+  terraform-plan:
+    name: terraform plan
+    runs-on: ubuntu-latest  
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ${{ env.ROOT_PATH }}
+
+      - name: Terraform Format
+        run: terraform fmt -check
+        working-directory: ${{ env.ROOT_PATH }}
+
+      - name: Terraform Plan
+        run: terraform plan
+        working-directory: ${{ env.ROOT_PATH }}
+  
+  terraform-apply:
+    
+    name: 'terraform apply'
+    needs: [terraform-plan]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ${{ env.ROOT_PATH }}
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        working-directory: ${{ env.ROOT_PATH }}
